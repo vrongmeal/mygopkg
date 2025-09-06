@@ -1,3 +1,3 @@
-module github.com/vrongmeal/mygopkg
+module go.vrong.me/mygopkg
 
 go 1.25.0
