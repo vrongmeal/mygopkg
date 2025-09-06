@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ .baseURL }}</title>
+    </head>
+    <body>
+        <h1>{{ .baseURL }}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Go Package</th>
+                    <th>Description</th>
+                    <th>Source code</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $module, $config := .modules }}
+                <tr>
+                    <td><a href="{{ moduleDocURL $module }}">{{ modulePath $module }}</a></td>
+                    <td>{{ $config.Description }}</td>
+                    <td><a href="{{ $config.GitURL }}/tree/{{ $config.DefaultBranch }}">{{ $config.GitURL }}</a></td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </body>
+</html>
