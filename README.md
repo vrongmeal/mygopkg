@@ -8,6 +8,9 @@ A static site generator for hosting Go packages on custom domains.
 go install go.vrong.me/mygopkg@latest
 ```
 
+> [!NOTE]  
+> The package is hosted using itself. See [go.vrong.me](https://go.vrong.me)
+
 ## Quick Start
 
 ### 1. Configure Your Modules
