@@ -102,18 +102,6 @@ mygopkg -base-url pkg.example.com
 mygopkg -base-url pkg.example.com -modules my-packages.json -build-dir dist
 ```
 
-## Modules JSON Reference
-
-```json
-{
-    "<module name>": {
-        "git": "<git url>",
-        "description": "<description for the module>",
-        "branch": "<branch to point the documentation to; defaults to main>"
-    }
-}
-```
-
 ## Configuration Reference
 
 ### modules.json Schema
