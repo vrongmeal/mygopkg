@@ -1,27 +1,170 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ .baseURL }}</title>
-    </head>
-    <body>
-        <h1>{{ .baseURL }}</h1>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ .baseURL }}</title>
+
+    <style>
+      :root{
+        --bg:#f6f8fa;
+        --card:#ffffff;
+        --muted:#6b7280;
+        --accent:#0f172a;
+        --primary:#2563eb;
+        --border:#e6e9ee;
+        --row-alt:#fbfdff;
+        --radius:10px;
+        --max-width:1100px;
+        --gap:18px;
+      }
+
+      html,body{
+        height:100%;
+        margin:0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        background: linear-gradient(180deg, var(--bg), #ffffff 60%);
+        color:var(--accent);
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+
+      .container{
+        max-width:var(--max-width);
+        margin:36px auto;
+        padding:24px;
+      }
+
+      header{
+        display:flex;
+        align-items:flex-start;
+        gap:16px;
+        margin-bottom:18px;
+      }
+
+      h1{
+        margin:0;
+        font-size:1.25rem;
+        font-weight:600;
+        color:var(--accent);
+      }
+
+      .subtitle{
+        margin:6px 0 0 0;
+        color:var(--muted);
+        font-size:0.94rem;
+      }
+
+      .card{
+        background:var(--card);
+        border-radius:var(--radius);
+        box-shadow:0 6px 20px rgba(17,24,39,0.06);
+        border:1px solid var(--border);
+        padding:12px;
+        overflow:auto;
+      }
+
+      table{
+        width:100%;
+        border-collapse:separate;
+        border-spacing:0;
+        font-size:0.95rem;
+        min-width:700px;
+      }
+
+      thead th{
+        text-align:left;
+        font-weight:600;
+        padding:14px 16px;
+        color:var(--muted);
+        background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+        position:sticky;
+        top:0;
+        z-index:1;
+      }
+
+      tbody tr:nth-child(even){
+        background:var(--row-alt);
+      }
+
+      td{
+        padding:12px 16px;
+        vertical-align:top;
+        border-top:1px solid var(--border);
+      }
+
+      a{
+        color:var(--primary);
+        text-decoration:none;
+        word-break:break-all;
+      }
+
+      a:hover{
+        text-decoration:underline;
+      }
+
+      .pkg-link{
+        font-weight:600;
+        color:#0b1220;
+      }
+
+      .desc{
+        color:var(--muted);
+        line-height:1.45;
+      }
+
+      .source{
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+        font-size:0.88rem;
+        color:#0b1220;
+      }
+
+      @media (max-width:820px){
+        .container{ padding:16px; margin:18px auto; }
+        thead th{ font-size:0.86rem; padding:10px 12px; }
+        td{ padding:10px 12px; font-size:0.92rem; }
+        .subtitle{ font-size:0.86rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div>
+          <h1>{{ .baseURL }}</h1>
+          <div class="subtitle">Go packages index</div>
+        </div>
+      </header>
+
+      <main class="card" role="region" aria-label="Go packages table">
         <table>
-            <thead>
-                <tr>
-                    <th>Go Package</th>
-                    <th>Description</th>
-                    <th>Source code</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{ range $module, $config := .modules }}
-                <tr>
-                    <td><a href="{{ moduleDocURL $module }}">{{ modulePath $module }}</a></td>
-                    <td>{{ $config.Description }}</td>
-                    <td><a href="{{ $config.GitURL }}/tree/{{ $config.DefaultBranch }}">{{ $config.GitURL }}</a></td>
-                </tr>
-                {{ end }}
-            </tbody>
+          <thead>
+            <tr>
+              <th>Go Package</th>
+              <th>Description</th>
+              <th>Source code</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range $module, $config := .modules }}
+            <tr>
+              <td>
+                <a class="pkg-link" href="{{ moduleDocURL $module }}">{{ modulePath $module }}</a>
+              </td>
+              <td>
+                <div class="desc">{{ $config.Description }}</div>
+              </td>
+              <td>
+                <a class="source" href="{{ $config.GitURL }}/tree/{{ $config.DefaultBranch }}" rel="noopener noreferrer" target="_blank">
+                  {{ $config.GitURL }}
+                </a>
+              </td>
+            </tr>
+            {{ end }}
+          </tbody>
         </table>
-    </body>
+      </main>
+    </div>
+  </body>
 </html>

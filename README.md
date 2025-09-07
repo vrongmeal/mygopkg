@@ -148,3 +148,7 @@ mygopkg -base-url pkg.example.com -modules my-packages.json -build-dir dist
 4. **Documentation**: Links to pkg.go.dev for comprehensive documentation
 
 When users run `go get yourdomain.com/your-module`, they'll be redirected to the correct Git repository while maintaining your custom domain branding.
+
+## License
+
+See [LICENSE](./LICENSE)
